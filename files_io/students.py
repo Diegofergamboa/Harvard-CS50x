@@ -84,13 +84,9 @@ import csv
 #     print(f"{student['name']} is in {student['home']}")
 
 ### A way to save and iterate using CSV Dict Reader and lambda
-students = []
 name = input('what is your name? ')
 home = input('what is your home? ')
 
 with open("./files_io/students.csv", "a") as file:
     writer = csv.DictWriter(file, fieldnames=["name" , "home"])
     writer.writerow({"name" : name, "home": home})
-
-for student in sorted(students, key=lambda student: student["name"]):
-    print(f"{student['name']} is in {student['home']}")
