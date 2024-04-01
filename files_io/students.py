@@ -1,3 +1,5 @@
+import csv
+
 ### A way to save and iterate CSV data ###
 # with open("./files_io/students.csv") as file:
 #     for line in file:
@@ -18,22 +20,65 @@
 
 
 
-### A way to save and iterate CSV data with a dictionary ###
+# ### A way to save and iterate CSV data with a dictionary ###
+# students = []
+
+# with open("./files_io/students.csv") as file:
+#     for line in file:
+#         name, house = line.rstrip().split(",")
+#         # Saving information as keys and values for the dic
+#         student = {"name" : name, "house" : house}
+#         students.append(student)
+
+
+# # Functions to pass as parameters
+# def get_name(student):
+#     return student['name']
+
+# def get_house(student):
+#     return student['house']
+
+# # Passing functions as parameters into functions
+# for student in sorted(students, key=get_name, reverse=True):
+#     print(f"{student['name']} is in {student['house']}")
+
+
+
+# # ### A way to save and iterate using lambda
+
+# students = []
+
+# with open("./files_io/students.csv") as file:
+#     for line in file:
+#         name, house = line.rstrip().split(",")
+#         student = {"name" : name , "house" : house}
+#         students.append(student)
+
+# for student in sorted(students, key=lambda student: student["name"]):
+#     print(f"{student['name']} is in {student['house']}")
+
+
+# ### A way to save and iterate using CSV and lambda
+
+# students = []
+
+# with open("./files_io/students.csv") as file:
+#     reader = csv.reader(file)
+#     for name, home in reader:
+#         students.append({"name": name, "home": home})
+
+# for student in sorted(students, key=lambda student: student["name"]):
+#     print(f"{student['name']} is in {student['home']}")
+
+
+
+# ### A way to save and iterate using CSV Dict Reader and lambda
 students = []
 
 with open("./files_io/students.csv") as file:
-    for line in file:
-        name, house = line.rstrip().split(",")
-        # Saving information as keys and values for the dic
-        student = {"name" : name, "house" : house}
-        students.append(student)
+    reader = csv.DictReader(file)
+    for row in reader:
+        students.append({"name": row["name"], "home": row["home"]})
 
-def get_name(student):
-    return student['name']
-
-def get_house(student):
-    return student['house']
-
-# Passing functions as parameters into functions
-for student in sorted(students, key=get_house, reverse=True):
-    print(f"{student['name']} is in {student['house']}")
+for student in sorted(students, key=lambda student: student["name"]):
+    print(f"{student['name']} is in {student['home']}")
